@@ -13,10 +13,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fabbitox.flow.dto.PredictInputs;
+import fabbitox.flow.dto.PredictResult;
+import fabbitox.flow.websocket.WebSocketHandler;
 import reactor.core.publisher.Mono;
 
 public class PredictSchedule {
@@ -34,6 +37,7 @@ public class PredictSchedule {
 	private int id;
 	private String[][][] fcstValues;
 	private Double[] waterLevels = new Double[7];
+	private String waterStart;
 	
 	public PredictSchedule(int awsCount, String[] xys, String obscd, int id) {
 		this.awsCount = awsCount;
@@ -87,6 +91,7 @@ public class PredictSchedule {
                 int startIndex = data.size() - 7;
                 if (minute >= 10 && minute < 45)
                 	startIndex -= 1;
+                waterStart = data.get(startIndex).get("ymdh").asText();
                 for (int j = 0; j < 7; j++) {
             		waterLevels[j] = data.get(startIndex + j).get("wl").asDouble();
             	}
@@ -111,7 +116,19 @@ public class PredictSchedule {
                 .retrieve()
                 .bodyToMono(String.class);
 		responseMono.subscribe(
-                responseBody -> System.out.println("Response: " + responseBody),
+                responseBody -> {
+                	ObjectMapper om = new ObjectMapper();
+                	try {
+                		JsonNode jsonResult = om.readTree(responseBody);
+                		Double[] results = new Double[3];
+                		for (int i = 0; i < 3; i++) {
+                			results[i] = jsonResult.get(0).get(i).asDouble();
+                		}
+						WebSocketHandler.sendData(om.writeValueAsString(new PredictResult(waterLevels, results, waterStart)));
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+					}
+                },
                 error -> System.err.println("Error: " + error.getMessage())
         );
 	}
