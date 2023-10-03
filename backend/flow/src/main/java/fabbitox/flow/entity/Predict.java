@@ -1,6 +1,7 @@
 package fabbitox.flow.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -18,7 +19,21 @@ public class Predict {
 	private LocalDateTime predictTime;
 	private LocalDateTime requestTime;
 	@OneToMany(mappedBy = "predict", cascade = CascadeType.ALL)
-	private List<PredictResult> results;
-	@OneToMany(mappedBy = "predict", cascade = CascadeType.ALL)
 	private List<Input> inputs;
+	@OneToMany(mappedBy = "predict", cascade = CascadeType.ALL)
+	private List<PredictResult> results;
+
+	public Predict(LocalDateTime predictTime, LocalDateTime requestTime, List<Input> inputs,
+			List<PredictResult> results) {
+		this.predictTime = predictTime;
+		this.requestTime = requestTime;
+		this.inputs = inputs;
+		for (Input input: inputs) {
+			input.setPredict(this);
+		}
+		this.results = results;
+		for (PredictResult result: results) {
+			result.setPredict(this);
+		}
+	}
 }

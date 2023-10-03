@@ -20,4 +20,21 @@ public class AwsValue {
 	@ManyToOne
 	@JoinColumn(name = "aws_id")
 	private Aws aws;
+	@ManyToOne
+	@JoinColumn(name = "input_id")
+	private Input input;
+	
+	public AwsValue(Double temperature, Double windDirection, Double windSpeed, Double rainfall, Double humidity,
+			Aws aws) {
+		this.temperature = temperature;
+		this.windDirection = windDirection;
+		this.windSpeed = windSpeed;
+		this.rainfall = rainfall;
+		this.humidity = humidity;
+		this.aws = aws;
+	}
+	
+	public void setInput(Input input) {
+		this.input = input;
+	}
 }

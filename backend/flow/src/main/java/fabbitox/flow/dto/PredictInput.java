@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PredictInputs {
-	private String[][][] fcstValues;
+public class PredictInput {
+	private Double[][][] fcstValues;
 	private Double[] waterLevels;
 	
-	public PredictInputs(String[][][] fcstValues, Double[] waterLevels) {
+	public PredictInput(Double[][][] fcstValues, Double[] waterLevels) {
 		this.fcstValues = fcstValues;
 		this.waterLevels = waterLevels;
 	}

@@ -17,4 +17,13 @@ public class PredictResult {
 	@ManyToOne
 	@JoinColumn(name = "predict_id")
 	private Predict predict;
+	
+	public PredictResult(Integer hour, Double waterLevel) {
+		this.hour = hour;
+		this.waterLevel = waterLevel;
+	}
+	
+	public void setPredict(Predict predict) {
+		this.predict = predict;
+	}
 }
