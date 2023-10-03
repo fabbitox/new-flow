@@ -14,6 +14,8 @@ def preprocess(data):
         for values in sequence:
             if values[3] == '강수없음':
                 values[3] = '0'
+            else:
+                values[3] = values[3][:-2]
     water_levels = data['waterLevels']
     water = [water_levels[i:i+5] for i in range(3)]
     return np.array(fcst_values, dtype=float)[:, np.newaxis], np.array(water, dtype=float)[np.newaxis, :]
