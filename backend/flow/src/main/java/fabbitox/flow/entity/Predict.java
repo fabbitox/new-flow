@@ -1,7 +1,6 @@
 package fabbitox.flow.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -35,5 +34,18 @@ public class Predict {
 		for (PredictResult result: results) {
 			result.setPredict(this);
 		}
+	}
+
+	public LocalDateTime getPredictTime() {
+		return predictTime;
+	}
+	public LocalDateTime getRequestTime() {
+		return requestTime;
+	}
+	public List<Input> getInputs() {
+		return inputs;
+	}
+	public List<PredictResult> getResults() {
+		return results;
 	}
 }

@@ -23,6 +23,12 @@ public class PredictResult {
 		this.waterLevel = waterLevel;
 	}
 	
+	public Integer getHour() {
+		return hour;
+	}
+	public Double getWaterLevel() {
+		return waterLevel;
+	}
 	public void setPredict(Predict predict) {
 		this.predict = predict;
 	}

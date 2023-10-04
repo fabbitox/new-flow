@@ -34,6 +34,24 @@ public class AwsValue {
 		this.aws = aws;
 	}
 	
+	public Double getTemperature() {
+		return temperature;
+	}
+	public Double getWindDirection() {
+		return windDirection;
+	}
+	public Double getWindSpeed() {
+		return windSpeed;
+	}
+	public Double getRainfall() {
+		return rainfall;
+	}
+	public Double getHumidity() {
+		return humidity;
+	}
+	public Aws getAws() {
+		return aws;
+	}
 	public void setInput(Input input) {
 		this.input = input;
 	}

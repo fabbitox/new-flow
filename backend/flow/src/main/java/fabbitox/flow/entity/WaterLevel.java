@@ -22,4 +22,11 @@ public class WaterLevel {
 	@MapsId("targetId")
 	@JoinColumn(name = "target_id")
 	private Target target;
+	
+	public WaterLevelId getId() {
+		return id;
+	}
+	public Double getWaterLevel() {
+		return waterLevel;
+	}
 }

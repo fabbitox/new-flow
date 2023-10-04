@@ -16,4 +16,8 @@ public class Aws {
 	@ManyToOne
 	@JoinColumn(name = "target_id")
 	private Target target;
+	
+	public Integer getId() {
+		return id;
+	}
 }

@@ -31,6 +31,12 @@ public class Input {
 		}
 	}
 	
+	public Integer getSequence() {
+		return sequence;
+	}
+	public List<AwsValue> getAwsValues() {
+		return awsValues;
+	}
 	public void setPredict(Predict predict) {
 		this.predict = predict;
 	}
