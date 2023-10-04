@@ -1,5 +1,7 @@
 package fabbitox.flow.entity;
 
+import javax.validation.Valid;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WaterLevel {
 	@EmbeddedId
+	@Valid
 	private WaterLevelId id;
 	private Double waterLevel;
 	@ManyToOne
