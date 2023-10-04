@@ -34,3 +34,4 @@ build/
 
 src/main/resources/application.properties
 src/main/resources/META-INF/additional-spring-configuration-metadata.json
+.metadata
