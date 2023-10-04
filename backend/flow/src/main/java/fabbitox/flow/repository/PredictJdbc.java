@@ -33,7 +33,7 @@ public class PredictJdbc implements PredictRepository {
 			ps.setTimestamp(2, Timestamp.valueOf(predict.getRequestTime()));
 			return ps;
 		}, keyHolder);
-		Integer predict_id = keyHolder.getKey().intValue();
+		Integer predictId = keyHolder.getKey().intValue();
 
 		List<Input> inputs = predict.getInputs();
 		for (int i = 0; i < inputs.size(); i++) {
@@ -42,17 +42,17 @@ public class PredictJdbc implements PredictRepository {
 				PreparedStatement ps = connection.prepareStatement(
 						"INSERT INTO input (sequence, predict_id) VALUES (?, ?)", new String[] { "id" });
 				ps.setInt(1, sequence);
-				ps.setInt(2, predict_id);
+				ps.setInt(2, predictId);
 				return ps;
 			}, keyHolder);
-			Integer input_id = keyHolder.getKey().intValue();
+			Integer inputId = keyHolder.getKey().intValue();
 
 			List<AwsValue> awsValues = inputs.get(i).getAwsValues();
 			for (AwsValue awsValue : awsValues) {
 				jdbcTemplate.update(
 						"INSERT INTO aws_value (temperature, wind_direction, wind_speed, rainfall, humidity, aws_id, input_id) VALUES (?, ?, ?, ?, ?, ?, ?)",
 						awsValue.getTemperature(), awsValue.getWindDirection(), awsValue.getWindSpeed(),
-						awsValue.getRainfall(), awsValue.getHumidity(), awsValue.getAws().getId(), input_id);
+						awsValue.getRainfall(), awsValue.getHumidity(), awsValue.getAws().getId(), inputId);
 			}
 		}
 		
@@ -61,7 +61,7 @@ public class PredictJdbc implements PredictRepository {
 			PredictResult result = results.get(i);
 			jdbcTemplate.update(
 					"INSERT INTO predict_result (hour, water_level, predict_id) VALUES (?, ?, ?)",
-					result.getHour(), result.getWaterLevel(), predict_id);
+					result.getHour(), result.getWaterLevel(), predictId);
 		}
 	}
 }
