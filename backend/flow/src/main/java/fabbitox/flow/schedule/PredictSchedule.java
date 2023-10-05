@@ -167,7 +167,7 @@ public class PredictSchedule {
 				for (int i = 0; i < 3; i++) {
 					results[i] = jsonResult.get(0).get(i).asDouble();
 				}
-				WebSocketHandler.sendData(om.writeValueAsString(new WaterPredict(waterLevels, results, waterStart,
+				WebSocketHandler.sendData(om.writeValueAsString(new WaterPredict(fcstValues, waterLevels, results, waterStart,
 						requestTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))));
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
