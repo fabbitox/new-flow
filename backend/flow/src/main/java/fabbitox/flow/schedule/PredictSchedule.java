@@ -191,7 +191,7 @@ public class PredictSchedule {
 			predictResults.add(new PredictResult(i + 1, results[i]));
 		}
 		predictService.insertPredict(new Predict(base.truncatedTo(java.time.temporal.ChronoUnit.HOURS), requestTime,
-				inputs, predictResults));
+				inputs, predictResults, target));
 		for (int i = 0; i < 7; i++) {
 			waterLevelService
 					.insertWaterLevel(new WaterLevel(new WaterLevelId(id, waterHours[i]), waterLevels[i], target));

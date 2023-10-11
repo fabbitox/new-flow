@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: newflow
+-- Host: 127.0.0.1    Database: flow
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `aws`
+-- Table structure for table `input`
 --
 
-DROP TABLE IF EXISTS `aws`;
+DROP TABLE IF EXISTS `input`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `aws` (
+CREATE TABLE `input` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `target_id` int NOT NULL,
+  `sequence` int DEFAULT NULL,
+  `predict_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_aws_target1_idx` (`target_id`),
-  CONSTRAINT `fk_aws_target1` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  KEY `fk_input_predict1_idx` (`predict_id`),
+  CONSTRAINT `fk_input_predict1` FOREIGN KEY (`predict_id`) REFERENCES `predict` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `aws`
+-- Dumping data for table `input`
 --
 
-LOCK TABLES `aws` WRITE;
-/*!40000 ALTER TABLE `aws` DISABLE KEYS */;
-INSERT INTO `aws` VALUES (1,'사상',1),(2,'북구',1),(3,'사하',1);
-/*!40000 ALTER TABLE `aws` ENABLE KEYS */;
+LOCK TABLES `input` WRITE;
+/*!40000 ALTER TABLE `input` DISABLE KEYS */;
+INSERT INTO `input` VALUES (1,1,1),(2,2,1),(3,3,1),(4,1,2),(5,2,2),(6,3,2),(7,1,3),(8,2,3),(9,3,3),(10,1,4),(11,2,4),(12,3,4),(13,1,5),(14,2,5),(15,3,5),(16,1,6),(17,2,6),(18,3,6),(19,1,7),(20,2,7),(21,3,7),(22,1,8),(23,2,8),(24,3,8),(25,1,9),(26,2,9),(27,3,9),(28,1,10),(29,2,10),(30,3,10),(31,1,11),(32,2,11),(33,3,11),(34,1,12),(35,2,12),(36,3,12),(37,1,13),(38,2,13),(39,3,13),(40,1,14),(41,2,14),(42,3,14),(43,1,15),(44,2,15),(45,3,15),(46,1,16),(47,2,16),(48,3,16),(49,1,18),(50,2,18),(51,3,18),(52,1,19),(53,2,19),(54,3,19),(55,1,20),(56,2,20),(57,3,20),(58,1,21),(59,2,21),(60,3,21);
+/*!40000 ALTER TABLE `input` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-04 15:09:39
+-- Dump completed on 2023-10-11 21:04:59

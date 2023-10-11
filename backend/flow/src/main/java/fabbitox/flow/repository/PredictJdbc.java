@@ -28,9 +28,10 @@ public class PredictJdbc implements PredictRepository {
 
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(
-					"INSERT INTO predict (predict_time, request_time) VALUES (?, ?)", new String[] { "id" });
+					"INSERT INTO predict (predict_time, request_time, target_id) VALUES (?, ?, ?)", new String[] { "id" });
 			ps.setTimestamp(1, Timestamp.valueOf(predict.getPredictTime()));
 			ps.setTimestamp(2, Timestamp.valueOf(predict.getRequestTime()));
+			ps.setInt(3, predict.getTarget().getId());
 			return ps;
 		}, keyHolder);
 		Integer predictId = keyHolder.getKey().intValue();
