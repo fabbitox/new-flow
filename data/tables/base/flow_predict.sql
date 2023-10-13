@@ -26,8 +26,11 @@ CREATE TABLE `predict` (
   `id` int NOT NULL AUTO_INCREMENT,
   `predict_time` datetime DEFAULT NULL,
   `request_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `target_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_predict_target1_idx` (`target_id`),
+  CONSTRAINT `fk_predict_target1` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
